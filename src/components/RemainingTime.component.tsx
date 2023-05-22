@@ -23,7 +23,7 @@ function getTodayDateWithTimestamp(time: string) {
 }
 
 export const RemainingTime = () => {
-	const { nextPrayer, prayerTimes } = useContext(PrayerTimesContext);
+	const { nextPrayer, prayerTimes, isAdhan, setIsAdhan } = useContext(PrayerTimesContext);
 	const [remaningTime, setRemainingTime] = useState<Date | null>(null);
 
 	useEffect(() => {
@@ -36,6 +36,7 @@ export const RemainingTime = () => {
 
 			const differenceDate = new Date(diff);
 			if (differenceDate.getHours() === 0 && differenceDate.getMinutes() === 0 && differenceDate.getSeconds() === 0) {
+				setIsAdhan(true);
 				setRemainingTime(null);
 				clearInterval(interval);
 				return;
@@ -45,7 +46,22 @@ export const RemainingTime = () => {
 		}, 1000);
 
 		return () => clearInterval(interval);
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [nextPrayer, prayerTimes]);
+
+	// Set the adhan back to false after 5 seconds
+	useEffect(() => {
+		if (!isAdhan) return;
+
+		const timeout = setTimeout(() => {
+			setIsAdhan(false);
+		}, 5000);
+
+		return () => clearTimeout(timeout);
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isAdhan]);
 
 	const formattedRemainingTime = useMemo(() => {
 		if (!remaningTime) {

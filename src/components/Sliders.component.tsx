@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
@@ -57,17 +56,7 @@ export const Sliders = () => {
 	}, [timer, sliders]);
 
 	return (
-		<Paper
-			elevation={10}
-			sx={{
-				p: 2,
-				height: 'calc(100vh - 275px)',
-				display: 'flex',
-				alignItems: 'center',
-				justifyContent: 'center',
-				position: 'relative'
-			}}
-		>
+		<>
 			{sliders ? (
 				<>
 					<Box
@@ -89,6 +78,6 @@ export const Sliders = () => {
 					</Box>
 				</>
 			) : null}
-		</Paper>
+		</>
 	);
 };

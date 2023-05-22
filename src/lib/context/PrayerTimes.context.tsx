@@ -21,6 +21,8 @@ interface PrayerTimesContext {
 	setActivePrayer: (prayer: keyof PrayerTimes | null) => void;
 	nextPrayer: keyof PrayerTimes | null;
 	setNextPrayer: (prayer: keyof PrayerTimes | null) => void;
+	isAdhan: boolean;
+	setIsAdhan: (isAdhan: boolean) => void;
 }
 
 const initData: PrayerTimes = {
@@ -43,7 +45,10 @@ export const PrayerTimesContext = createContext<PrayerTimesContext>({
 	setActivePrayer: () => {},
 	nextPrayer: null,
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	setNextPrayer: () => {}
+	setNextPrayer: () => {},
+	isAdhan: false,
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	setIsAdhan: () => {}
 });
 
 export const PrayerTimesProvider = ({ children }: PropsWithChildren) => {
@@ -56,6 +61,7 @@ export const PrayerTimesProvider = ({ children }: PropsWithChildren) => {
 	});
 	const [activePrayer, setActivePrayer] = useState<keyof PrayerTimes | null>(null);
 	const [nextPrayer, setNextPrayer] = useState<keyof PrayerTimes | null>(null);
+	const [isAdhan, setIsAdhan] = useState(false);
 
 	// This effect checks if prayer times are in local storage
 	// If not, fetch them. Do this only once
@@ -119,7 +125,9 @@ export const PrayerTimesProvider = ({ children }: PropsWithChildren) => {
 					activePrayer,
 					setActivePrayer,
 					nextPrayer,
-					setNextPrayer
+					setNextPrayer,
+					isAdhan,
+					setIsAdhan
 				}}
 			>
 				{children}
