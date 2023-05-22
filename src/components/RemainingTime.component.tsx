@@ -23,7 +23,7 @@ function getTodayDateWithTimestamp(time: string) {
 }
 
 export const RemainingTime = () => {
-	const { nextPrayer, prayerTimes, isAdhan, setIsAdhan } = useContext(PrayerTimesContext);
+	const { nextPrayer, prayerTimes, isAdhan, setIsAdhan, activePrayer } = useContext(PrayerTimesContext);
 	const [remaningTime, setRemainingTime] = useState<Date | null>(null);
 
 	useEffect(() => {
@@ -36,7 +36,10 @@ export const RemainingTime = () => {
 
 			const differenceDate = new Date(diff);
 			if (differenceDate.getHours() === 0 && differenceDate.getMinutes() === 0 && differenceDate.getSeconds() === 0) {
-				setIsAdhan(true);
+				if (activePrayer !== 'Gunes') {
+					setIsAdhan(true);
+				}
+
 				setRemainingTime(null);
 				clearInterval(interval);
 				return;

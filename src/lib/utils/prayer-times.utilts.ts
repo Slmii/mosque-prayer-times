@@ -25,12 +25,22 @@ export const isBefore = (time: string) => {
 	return currentTime <= timeDateTime;
 };
 
+export const isAfter = (time: string) => {
+	const currentTime = new Date();
+	const timeParts = time.split(':');
+	const timeDateTime = new Date();
+
+	timeDateTime.setHours(Number(timeParts[0]), Number(timeParts[1]), 0);
+
+	return currentTime >= timeDateTime;
+};
+
 export const translations: Record<keyof PrayerTimes, string> = {
 	Aksam: 'Akşam',
 	Ikindi: 'İkindi',
 	Gunes: 'Güneş',
 	Yatsi: 'Yatsı',
-	Imsak: 'İmsak',
+	Imsak: 'Sabah',
 	Ogle: 'Öğle',
 	HicriDate: 'Hicri Tarih'
 };

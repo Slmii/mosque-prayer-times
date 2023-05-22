@@ -3,7 +3,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 
 import { LOCALE } from 'lib/constants';
 import { PrayerTimesContext } from 'lib/context/PrayerTimes.context';
-import { isBefore, isBetween } from 'lib/utils/prayer-times.utilts';
+import { isAfter, isBefore, isBetween } from 'lib/utils/prayer-times.utilts';
 
 export const Clock = () => {
 	const { setActivePrayer, prayerTimes, activePrayer, setNextPrayer } = useContext(PrayerTimesContext);
@@ -21,7 +21,7 @@ export const Clock = () => {
 				setActivePrayer('Ikindi');
 			} else if (isBetween(prayerTimes.today.Aksam, prayerTimes.today.Yatsi)) {
 				setActivePrayer('Aksam');
-			} else if (isBetween(prayerTimes.today.Yatsi, prayerTimes.tomorrow.Imsak) || isBefore(prayerTimes.today.Imsak)) {
+			} else if (isAfter(prayerTimes.today.Yatsi) || isBefore(prayerTimes.today.Imsak)) {
 				setActivePrayer('Yatsi');
 			}
 
