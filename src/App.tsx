@@ -1,5 +1,7 @@
 import CssBaseline from '@mui/material/CssBaseline';
 import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useContext } from 'react';
 
@@ -24,10 +26,36 @@ function App() {
 						display: 'flex',
 						alignItems: 'center',
 						justifyContent: 'center',
-						position: 'relative'
+						position: 'relative',
+						animation: isAdhan ? 'flicker 1.5s infinite' : undefined,
+						'@keyframes flicker': {
+							'0%': {
+								backgroundColor: 'white',
+								color: 'black'
+							},
+							'50%': {
+								backgroundColor: 'red',
+								color: 'white'
+							},
+							'100%': {
+								backgroundColor: 'white',
+								color: 'black'
+							}
+						}
 					}}
 				>
-					{!isAdhan ? <Sliders /> : 'ADHAN TIJD'}
+					{!isAdhan ? (
+						<Sliders />
+					) : (
+						<Stack direction="column" alignContent="center" textAlign="center" justifyContent="center">
+							<Typography variant="h1" fontWeight="bold" fontSize={200}>
+								Adhan
+							</Typography>
+							<Typography variant="h1" fontWeight="bold" fontSize={200}>
+								Ezan
+							</Typography>
+						</Stack>
+					)}
 				</Paper>
 			</Appbar>
 		</QueryClientProvider>

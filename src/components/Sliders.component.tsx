@@ -1,7 +1,10 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+
+import { sliderState } from 'lib/recoil/slider.atom';
 
 interface SliderRepsonse {
 	id: number;
@@ -17,7 +20,7 @@ interface TimerResponse {
 }
 
 export const Sliders = () => {
-	const [index, setIndex] = useState(0);
+	const [sliderIndex, setSliderIndex] = useRecoilState(sliderState);
 
 	const { data: sliders } = useQuery<SliderRepsonse[]>({
 		queryKey: ['sliders'],
@@ -39,13 +42,13 @@ export const Sliders = () => {
 
 		const interval = setInterval(() => {
 			// If index is the last index, set it to 0
-			if (index === sliders.length - 1) {
-				setIndex(0);
+			if (sliderIndex === sliders.length - 1) {
+				setSliderIndex(0);
 				return;
 			}
 
 			// Else, increment the index
-			setIndex(index + 1);
+			setSliderIndex(sliderIndex + 1);
 		}, Number(timer.acf.interval_in_seconden) * 1000);
 
 		return () => {
@@ -61,7 +64,7 @@ export const Sliders = () => {
 				<>
 					<Box
 						dangerouslySetInnerHTML={{
-							__html: sliders[index].content.rendered
+							__html: sliders[sliderIndex].content.rendered
 						}}
 					/>
 					<Box
@@ -73,7 +76,7 @@ export const Sliders = () => {
 						}}
 					>
 						<Typography variant="h3" fontWeight="bold">
-							{index + 1} / {sliders.length}
+							{sliderIndex + 1} / {sliders.length}
 						</Typography>
 					</Box>
 				</>
