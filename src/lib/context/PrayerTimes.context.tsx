@@ -68,7 +68,7 @@ export const PrayerTimesProvider = ({ children }: PropsWithChildren) => {
 	useEffect(() => {
 		const init = async () => {
 			const prayerTimes = await fetchPrayerTimes();
-			setTimes(prayerTimes, 0);
+			setTimes(prayerTimes);
 		};
 
 		init();
@@ -80,9 +80,9 @@ export const PrayerTimesProvider = ({ children }: PropsWithChildren) => {
 			const now = new Date();
 
 			// Check if it's midnight
-			if (now.getHours() === 0 && now.getMinutes() === 0 && now.getSeconds() === 0) {
+			if (now.getHours() === 0 && now.getMinutes() === 0 && now.getSeconds() === 5) {
 				const prayerTimes = await fetchPrayerTimes();
-				setTimes(prayerTimes, 1);
+				setTimes(prayerTimes);
 			}
 		};
 
@@ -94,25 +94,42 @@ export const PrayerTimesProvider = ({ children }: PropsWithChildren) => {
 		};
 	});
 
-	const setTimes = (prayerTimes: PrayerTimeResponse[], index: number) => {
+	const setTimes = (prayerTimes: PrayerTimeResponse[]) => {
+		const now = new Date();
+		const prayerTime = prayerTimes.find(prayerTime => {
+			const prayerDate = new Date(prayerTime.MiladiTarihUzunIso8601);
+			prayerDate.setMinutes(prayerDate.getMinutes() - prayerDate.getTimezoneOffset());
+
+			return (
+				prayerDate.getDay() === now.getDay() &&
+				prayerDate.getMonth() === now.getMonth() &&
+				prayerDate.getFullYear() === now.getFullYear()
+			);
+		});
+
+		if (!prayerTime) {
+			return;
+		}
+
 		setPrayerTimes({
 			today: {
-				Aksam: prayerTimes[index].Aksam,
-				Gunes: prayerTimes[index].Gunes,
-				Ikindi: prayerTimes[index].Ikindi,
-				Imsak: prayerTimes[index].Imsak,
-				Ogle: prayerTimes[index].Ogle,
-				Yatsi: prayerTimes[index].Yatsi,
-				HicriDate: prayerTimes[index].HicriTarihUzun
+				Aksam: prayerTime.Aksam,
+				Gunes: prayerTime.Gunes,
+				Ikindi: prayerTime.Ikindi,
+				Imsak: prayerTime.Imsak,
+				Ogle: prayerTime.Ogle,
+				Yatsi: prayerTime.Yatsi,
+				HicriDate: prayerTime.HicriTarihUzun
 			},
+			// TODO: get tomorrow's prayer times
 			tomorrow: {
-				Aksam: prayerTimes[index + 1].Aksam,
-				Gunes: prayerTimes[index + 1].Gunes,
-				Ikindi: prayerTimes[index + 1].Ikindi,
-				Imsak: prayerTimes[index + 1].Imsak,
-				Ogle: prayerTimes[index + 1].Ogle,
-				Yatsi: prayerTimes[index + 1].Yatsi,
-				HicriDate: prayerTimes[index + 1].HicriTarihUzun
+				Aksam: prayerTime.Aksam,
+				Gunes: prayerTime.Gunes,
+				Ikindi: prayerTime.Ikindi,
+				Imsak: prayerTime.Imsak,
+				Ogle: prayerTime.Ogle,
+				Yatsi: prayerTime.Yatsi,
+				HicriDate: prayerTime.HicriTarihUzun
 			}
 		});
 	};
