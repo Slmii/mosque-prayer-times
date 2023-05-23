@@ -25,7 +25,13 @@ export const Sliders = () => {
 	const { data: sliders } = useQuery<SliderRepsonse[]>({
 		queryKey: ['sliders'],
 		refetchInterval: 5000,
-		queryFn: () => fetch('https://moskee-signage.cmswebdesign.nl/wp-json/wp/v2/posts/').then(res => res.json())
+		queryFn: async () => {
+			const data = (await fetch('https://moskee-signage.cmswebdesign.nl/wp-json/wp/v2/posts/').then(res =>
+				res.json()
+			)) as SliderRepsonse[];
+
+			return data.sort((a, b) => a.id - b.id);
+		}
 	});
 
 	const { data: timer } = useQuery<TimerResponse>({
@@ -41,13 +47,6 @@ export const Sliders = () => {
 		}
 
 		const interval = setInterval(() => {
-			// If index is the last index, set it to 0
-			if (sliderIndex === sliders.length - 1) {
-				setSliderIndex(0);
-				return;
-			}
-
-			// Else, increment the index
 			setSliderIndex(prevIndex => prevIndex + 1);
 		}, Number(timer.acf.interval_in_seconden) * 1000);
 
@@ -58,15 +57,26 @@ export const Sliders = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [timer, sliders]);
 
+	useEffect(() => {
+		// If index is the last index, set it to 0
+		if (sliders && sliderIndex === sliders.length) {
+			setSliderIndex(0);
+		}
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [sliderIndex, sliders?.length]);
+
 	return (
 		<>
 			{sliders ? (
 				<>
-					<Box
-						dangerouslySetInnerHTML={{
-							__html: sliders[sliderIndex].content.rendered
-						}}
-					/>
+					{sliders[sliderIndex] ? (
+						<Box
+							dangerouslySetInnerHTML={{
+								__html: sliders[sliderIndex].content.rendered
+							}}
+						/>
+					) : null}
 					<Box
 						sx={{
 							position: 'absolute',
