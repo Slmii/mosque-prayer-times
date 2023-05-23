@@ -42,7 +42,7 @@ export const Sliders = () => {
 
 		const interval = setInterval(() => {
 			setSliderIndex(prevIndex => prevIndex + 1);
-		}, 2000);
+		}, Number(timer.acf.interval_in_seconden) * 1000);
 
 		return () => {
 			clearInterval(interval);
