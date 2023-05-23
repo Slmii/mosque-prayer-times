@@ -48,7 +48,7 @@ export const Sliders = () => {
 			}
 
 			// Else, increment the index
-			setSliderIndex(sliderIndex + 1);
+			setSliderIndex(prevIndex => prevIndex + 1);
 		}, Number(timer.acf.interval_in_seconden) * 1000);
 
 		return () => {
