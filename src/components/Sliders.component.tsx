@@ -25,13 +25,7 @@ export const Sliders = () => {
 	const { data: sliders } = useQuery<SliderRepsonse[]>({
 		queryKey: ['sliders'],
 		refetchInterval: 5000,
-		queryFn: async () => {
-			const data = (await fetch('https://moskee-signage.cmswebdesign.nl/wp-json/wp/v2/posts/').then(res =>
-				res.json()
-			)) as SliderRepsonse[];
-
-			return data.sort((a, b) => a.id - b.id);
-		}
+		queryFn: () => fetch('https://moskee-signage.cmswebdesign.nl/wp-json/wp/v2/posts/').then(res => res.json())
 	});
 
 	const { data: timer } = useQuery<TimerResponse>({
@@ -48,7 +42,7 @@ export const Sliders = () => {
 
 		const interval = setInterval(() => {
 			setSliderIndex(prevIndex => prevIndex + 1);
-		}, Number(timer.acf.interval_in_seconden) * 1000);
+		}, 2000);
 
 		return () => {
 			clearInterval(interval);
