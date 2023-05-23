@@ -59,7 +59,7 @@ export const RemainingTime = () => {
 
 		const timeout = setTimeout(() => {
 			setIsAdhan(false);
-		}, 5000);
+		}, 10000);
 
 		return () => clearTimeout(timeout);
 
