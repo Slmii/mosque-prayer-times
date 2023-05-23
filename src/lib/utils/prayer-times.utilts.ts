@@ -40,7 +40,7 @@ export const translations: Record<keyof PrayerTimes, string> = {
 	Ikindi: 'İkindi',
 	Gunes: 'Güneş',
 	Yatsi: 'Yatsı',
-	Imsak: 'Sabah',
+	Imsak: 'Imsak',
 	Ogle: 'Öğle',
 	HicriDate: 'Hicri Tarih'
 };
