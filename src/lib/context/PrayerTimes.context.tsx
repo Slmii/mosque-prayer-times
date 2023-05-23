@@ -97,8 +97,7 @@ export const PrayerTimesProvider = ({ children }: PropsWithChildren) => {
 	const setTimes = (prayerTimes: PrayerTimeResponse[]) => {
 		const now = new Date();
 		const prayerTime = prayerTimes.find(prayerTime => {
-			const prayerDate = new Date(prayerTime.MiladiTarihUzunIso8601);
-			prayerDate.setMinutes(prayerDate.getMinutes() - prayerDate.getTimezoneOffset());
+			const prayerDate = new Date(prayerTime.MiladiTarihUzunIso8601.split('T')[0]);
 
 			return (
 				prayerDate.getDay() === now.getDay() &&
