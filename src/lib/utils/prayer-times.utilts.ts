@@ -47,7 +47,7 @@ export const translations: Record<keyof PrayerTimes, string> = {
 	HicriDate: 'Hicri Tarih'
 };
 
-export function getTodayDateWithTimestamp(time: string) {
+export function getTodayDate(time: string) {
 	const currentDate = new Date();
 	const [hours, minutes] = time.split(':');
 
@@ -63,7 +63,7 @@ export function getTodayDateWithTimestamp(time: string) {
 	return todayDateWithTimestamp;
 }
 
-export function getTomorrowDateWithTimestamp(time: string) {
+export function getTomorrowDate(time: string) {
 	const tomorrowDate = startOfTomorrow();
 	const [hours, minutes] = time.split(':');
 

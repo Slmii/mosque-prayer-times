@@ -1,7 +1,8 @@
 import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
+import { LOCALE } from 'lib/constants';
 import { Clock } from './Clock.component';
-import { CurrentDate } from './Date.component';
 import { RemainingTime } from './RemainingTime.component';
 
 export const Header = () => {
@@ -34,7 +35,14 @@ export const Header = () => {
 					justifyContent: 'center'
 				}}
 			>
-				<CurrentDate />
+				<Typography variant="h2" fontSize={50} fontWeight="bold" textTransform="capitalize">
+					{new Intl.DateTimeFormat(LOCALE, {
+						year: 'numeric',
+						month: 'long',
+						day: 'numeric',
+						weekday: 'long'
+					}).format(new Date())}
+				</Typography>
 				<Clock />
 			</Grid>
 		</Grid>
