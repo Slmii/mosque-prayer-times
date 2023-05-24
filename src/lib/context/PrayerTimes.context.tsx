@@ -81,8 +81,7 @@ export const PrayerTimesProvider = ({ children }: PropsWithChildren) => {
 
 			// Check if it's midnight
 			if (now.getHours() === 0 && now.getMinutes() === 0 && now.getSeconds() === 5) {
-				const prayerTimes = await fetchPrayerTimes();
-				setTimes(prayerTimes);
+				location.reload();
 			}
 		};
 
