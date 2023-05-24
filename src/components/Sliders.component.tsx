@@ -4,20 +4,10 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
+// import { useRandomHadithNumber } from 'lib/hooks/useRandomHadithNumber';
+// import { HadithResponse } from 'lib/types/Hadith';
 import { sliderState } from 'lib/recoil/slider.atom';
-
-interface SliderRepsonse {
-	id: number;
-	content: {
-		rendered: string;
-	};
-}
-
-interface TimerResponse {
-	acf: {
-		interval_in_seconden: string;
-	};
-}
+import { SliderRepsonse, TimerResponse } from 'lib/types/Sliders';
 
 export const Sliders = () => {
 	const [sliderIndex, setSliderIndex] = useRecoilState(sliderState);
@@ -30,9 +20,18 @@ export const Sliders = () => {
 
 	const { data: timer } = useQuery<TimerResponse>({
 		queryKey: ['timer'],
+		enabled: !!sliders && sliders.length > 0,
 		queryFn: () =>
 			fetch('https://moskee-signage.cmswebdesign.nl/wp-json/wp/v2/instellingen_slider/77').then(res => res.json())
 	});
+
+	// const hadithIndex = useRandomHadithNumber();
+	// const { data: hadiths } = useQuery<HadithResponse>({
+	// 	queryKey: ['hadiths'],
+	// 	enabled: !!sliders && sliders.length === 0,
+	// 	queryFn: () =>
+	// 		fetch('https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/tur-bukhari.json').then(res => res.json())
+	// });
 
 	// Make interval that changes the index
 	useEffect(() => {

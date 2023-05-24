@@ -1,3 +1,5 @@
+import { startOfTomorrow } from 'date-fns';
+
 import { PrayerTimes } from 'lib/context/PrayerTimes.context';
 
 export function isBetween(startTime: string, endTime: string) {
@@ -44,3 +46,37 @@ export const translations: Record<keyof PrayerTimes, string> = {
 	Ogle: 'Öğle',
 	HicriDate: 'Hicri Tarih'
 };
+
+export function getTodayDateWithTimestamp(time: string) {
+	const currentDate = new Date();
+	const [hours, minutes] = time.split(':');
+
+	const todayDateWithTimestamp = new Date(
+		currentDate.getFullYear(),
+		currentDate.getMonth(),
+		currentDate.getDate(),
+		// This is a fix for the time difference between Turkey and the Netherlands.
+		Number(hours) - 1,
+		Number(minutes)
+	);
+
+	return todayDateWithTimestamp;
+}
+
+export function getTomorrowDateWithTimestamp(time: string) {
+	const tomorrowDate = startOfTomorrow();
+	const [hours, minutes] = time.split(':');
+
+	const tomorrowDateWithTimestamp = new Date(
+		tomorrowDate.getFullYear(),
+		tomorrowDate.getMonth(),
+		tomorrowDate.getDate(),
+		// This is a fix for the time difference between Turkey and the Netherlands.
+		Number(hours) - 1,
+		Number(minutes)
+	);
+
+	console.log({ tomorrowDateWithTimestamp });
+
+	return tomorrowDateWithTimestamp;
+}

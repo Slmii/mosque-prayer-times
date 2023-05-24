@@ -4,23 +4,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 
 import { LOCALE } from 'lib/constants';
 import { PrayerTimesContext } from 'lib/context/PrayerTimes.context';
-import { translations } from 'lib/utils/prayer-times.utilts';
-
-function getTodayDateWithTimestamp(time: string) {
-	const currentDate = new Date();
-	const [hours, minutes] = time.split(':');
-
-	const todayDateWithTimestamp = new Date(
-		currentDate.getFullYear(),
-		currentDate.getMonth(),
-		currentDate.getDate(),
-		// This is a temporary fix for the time difference between Turkey and the Netherlands.
-		Number(hours) - 1,
-		Number(minutes)
-	);
-
-	return todayDateWithTimestamp;
-}
+import { getTodayDateWithTimestamp, getTomorrowDateWithTimestamp, translations } from 'lib/utils/prayer-times.utilts';
 
 export const RemainingTime = () => {
 	const { nextPrayer, prayerTimes, isAdhan, setIsAdhan, activePrayer } = useContext(PrayerTimesContext);
@@ -29,7 +13,11 @@ export const RemainingTime = () => {
 	useEffect(() => {
 		if (!nextPrayer) return;
 
-		const nextPrayerDate = getTodayDateWithTimestamp(prayerTimes.today[nextPrayer]);
+		const nextPrayerDate =
+			nextPrayer === 'Imsak'
+				? getTomorrowDateWithTimestamp(prayerTimes.tomorrow.Imsak)
+				: getTodayDateWithTimestamp(prayerTimes.today[nextPrayer]);
+
 		const interval = setInterval(() => {
 			const currentDate = new Date();
 			const diff = nextPrayerDate.getTime() - currentDate.getTime();

@@ -1,3 +1,4 @@
+import { startOfTomorrow } from 'date-fns';
 import { createContext, PropsWithChildren, useEffect, useState } from 'react';
 
 import { fetchPrayerTimes, PrayerTimeResponse } from '../api/prayer-timer';
@@ -105,7 +106,18 @@ export const PrayerTimesProvider = ({ children }: PropsWithChildren) => {
 			);
 		});
 
-		if (!prayerTime) {
+		const tomorrow = startOfTomorrow();
+		const prayerTimeTomorrow = prayerTimes.find(prayerTime => {
+			const prayerDate = new Date(prayerTime.MiladiTarihUzunIso8601.split('T')[0]);
+
+			return (
+				prayerDate.getDay() === tomorrow.getDay() &&
+				prayerDate.getMonth() === tomorrow.getMonth() &&
+				prayerDate.getFullYear() === tomorrow.getFullYear()
+			);
+		});
+
+		if (!prayerTime || !prayerTimeTomorrow) {
 			return;
 		}
 
@@ -119,15 +131,14 @@ export const PrayerTimesProvider = ({ children }: PropsWithChildren) => {
 				Yatsi: prayerTime.Yatsi,
 				HicriDate: prayerTime.HicriTarihUzun
 			},
-			// TODO: get tomorrow's prayer times
 			tomorrow: {
-				Aksam: prayerTime.Aksam,
-				Gunes: prayerTime.Gunes,
-				Ikindi: prayerTime.Ikindi,
-				Imsak: prayerTime.Imsak,
-				Ogle: prayerTime.Ogle,
-				Yatsi: prayerTime.Yatsi,
-				HicriDate: prayerTime.HicriTarihUzun
+				Aksam: prayerTimeTomorrow.Aksam,
+				Gunes: prayerTimeTomorrow.Gunes,
+				Ikindi: prayerTimeTomorrow.Ikindi,
+				Imsak: prayerTimeTomorrow.Imsak,
+				Ogle: prayerTimeTomorrow.Ogle,
+				Yatsi: prayerTimeTomorrow.Yatsi,
+				HicriDate: prayerTimeTomorrow.HicriTarihUzun
 			}
 		});
 	};
