@@ -44,7 +44,8 @@ export const translations: Record<keyof PrayerTimes, string> = {
 	Yatsi: 'Yatsı',
 	Imsak: 'İmsak',
 	Ogle: 'Öğle',
-	HicriDate: 'Hicri Tarih'
+	HicriDate: 'Hicri Tarih',
+	date: 'Miladi Tarih'
 };
 
 export function getTodayDate(time: string) {
@@ -75,8 +76,6 @@ export function getTomorrowDate(time: string) {
 		Number(hours) - 1,
 		Number(minutes)
 	);
-
-	console.log({ tomorrowDateWithTimestamp });
 
 	return tomorrowDateWithTimestamp;
 }

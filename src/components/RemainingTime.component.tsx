@@ -1,5 +1,6 @@
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { isToday } from 'date-fns';
 import { useContext, useEffect, useMemo, useState } from 'react';
 
 import { LOCALE } from 'lib/constants';
@@ -15,9 +16,11 @@ export const RemainingTime = () => {
 
 		// If the next prayer is Imsak, we need to get the tomorrow's Imsak time
 		const nextPrayerDate =
-			nextPrayer === 'Imsak'
+			nextPrayer === 'Imsak' && isToday(prayerTimes.today.date)
 				? getTomorrowDate(prayerTimes.tomorrow.Imsak)
-				: getTodayDate(prayerTimes.today[nextPrayer]);
+				: getTodayDate(prayerTimes.today[nextPrayer] as string);
+
+		console.log(prayerTimes);
 
 		const interval = setInterval(() => {
 			const currentDate = new Date();

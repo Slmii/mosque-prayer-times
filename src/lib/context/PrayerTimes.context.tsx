@@ -11,6 +11,7 @@ export interface PrayerTimes {
 	Aksam: string;
 	Yatsi: string;
 	HicriDate: string;
+	date: Date;
 }
 
 interface PrayerTimesContext {
@@ -33,7 +34,8 @@ const initData: PrayerTimes = {
 	Imsak: '',
 	Ogle: '',
 	Yatsi: '',
-	HicriDate: ''
+	HicriDate: '',
+	date: new Date()
 };
 
 export const PrayerTimesContext = createContext<PrayerTimesContext>({
@@ -129,7 +131,8 @@ export const PrayerTimesProvider = ({ children }: PropsWithChildren) => {
 				Imsak: prayerTime.Imsak,
 				Ogle: prayerTime.Ogle,
 				Yatsi: prayerTime.Yatsi,
-				HicriDate: prayerTime.HicriTarihUzun
+				HicriDate: prayerTime.HicriTarihUzun,
+				date: new Date(prayerTime.MiladiTarihUzunIso8601.split('T')[0])
 			},
 			tomorrow: {
 				Aksam: prayerTimeTomorrow.Aksam,
@@ -138,7 +141,8 @@ export const PrayerTimesProvider = ({ children }: PropsWithChildren) => {
 				Imsak: prayerTimeTomorrow.Imsak,
 				Ogle: prayerTimeTomorrow.Ogle,
 				Yatsi: prayerTimeTomorrow.Yatsi,
-				HicriDate: prayerTimeTomorrow.HicriTarihUzun
+				HicriDate: prayerTimeTomorrow.HicriTarihUzun,
+				date: new Date(prayerTimeTomorrow.MiladiTarihUzunIso8601.split('T')[0])
 			}
 		});
 	};
