@@ -3,6 +3,10 @@ export interface SliderRepsonse {
 	content: {
 		rendered: string;
 	};
+	title: {
+		rendered: string;
+	};
+	tags: number[];
 }
 
 export interface TimerResponse {

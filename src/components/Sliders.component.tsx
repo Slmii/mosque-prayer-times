@@ -8,6 +8,7 @@ import { useRecoilState } from 'recoil';
 // import { HadithResponse } from 'lib/types/Hadith';
 import { sliderState } from 'lib/recoil/slider.atom';
 import { SliderRepsonse, TimerResponse } from 'lib/types/Sliders';
+import { getImgFromHtmlString } from 'lib/utils/prayer-times.utilts';
 
 export const Sliders = () => {
 	const [sliderIndex, setSliderIndex] = useRecoilState(sliderState);
@@ -40,7 +41,7 @@ export const Sliders = () => {
 		}
 
 		const interval = setInterval(() => {
-			setSliderIndex(prevIndex => prevIndex + 1);
+			setSliderIndex(0);
 		}, Number(timer.acf.interval_in_seconden) * 1000);
 
 		return () => {
@@ -64,11 +65,23 @@ export const Sliders = () => {
 			{sliders ? (
 				<>
 					{sliders[sliderIndex] ? (
-						<Box
-							dangerouslySetInnerHTML={{
-								__html: sliders[sliderIndex].content.rendered
-							}}
-						/>
+						<>
+							{sliders[sliderIndex].tags.includes(5) ? (
+								<Box
+									component="img"
+									src={getImgFromHtmlString(sliders[sliderIndex].content.rendered)}
+									alt={sliders[sliderIndex].title.rendered}
+									width="100%"
+									height="100%"
+								/>
+							) : (
+								<Box
+									dangerouslySetInnerHTML={{
+										__html: sliders[sliderIndex].content.rendered
+									}}
+								/>
+							)}
+						</>
 					) : null}
 					<Box
 						sx={{
