@@ -71,7 +71,7 @@ export const Sliders = () => {
 									component="img"
 									src={getImgFromHtmlString(sliders[sliderIndex].content.rendered)}
 									alt={sliders[sliderIndex].title.rendered}
-									width="100%"
+									width="50%"
 									height="100%"
 								/>
 							) : (
