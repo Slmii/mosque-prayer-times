@@ -16,7 +16,7 @@ export const Sliders = () => {
 
 	const { data: sliders } = useQuery<SliderRepsonse[]>({
 		queryKey: ['sliders'],
-		refetchInterval: 5000,
+		refetchInterval: 10000,
 		queryFn: () => fetch('https://moskee-signage.cmswebdesign.nl/wp-json/wp/v2/posts/').then(res => res.json())
 	});
 
