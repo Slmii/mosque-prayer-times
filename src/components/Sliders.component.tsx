@@ -9,6 +9,7 @@ import { useRecoilState } from 'recoil';
 import { sliderState } from 'lib/recoil/slider.atom';
 import { SliderRepsonse, TimerResponse } from 'lib/types/Sliders';
 import { getImgFromHtmlString } from 'lib/utils/prayer-times.utilts';
+import Stack from '@mui/material/Stack';
 
 export const Sliders = () => {
 	const [sliderIndex, setSliderIndex] = useRecoilState(sliderState);
@@ -75,7 +76,10 @@ export const Sliders = () => {
 									height="100%"
 								/>
 							) : (
-								<Box
+								<Stack
+									height="100%"
+									alignItems="center"
+									justifyContent="center"
 									dangerouslySetInnerHTML={{
 										__html: sliders[sliderIndex].content.rendered
 									}}
@@ -83,18 +87,20 @@ export const Sliders = () => {
 							)}
 						</>
 					) : null}
-					<Box
-						sx={{
-							position: 'absolute',
-							bottom: 20,
-							left: '50%',
-							transform: 'translateX(-50%)'
-						}}
-					>
-						<Typography variant="h3" fontWeight="bold">
-							{sliderIndex + 1} / {sliders.length}
-						</Typography>
-					</Box>
+					{!!sliders.length && (
+						<Box
+							sx={{
+								position: 'absolute',
+								bottom: 20,
+								left: '50%',
+								transform: 'translateX(-50%)'
+							}}
+						>
+							<Typography variant="h3" fontWeight="bold">
+								{sliderIndex + 1} / {sliders.length}
+							</Typography>
+						</Box>
+					)}
 				</>
 			) : null}
 		</>

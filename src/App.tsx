@@ -22,7 +22,8 @@ function App() {
 					elevation={10}
 					sx={{
 						p: 2,
-						height: 'calc(100vh - 275px)',
+						minHeight: 'calc(100vh - 275px)',
+						maxHeight: 'calc(100vh - 275px)',
 						display: 'flex',
 						alignItems: 'center',
 						justifyContent: 'center',
