@@ -21,7 +21,7 @@ export interface PrayerTimeResponse {
 }
 
 export const fetchPrayerTimes = async () => {
-	const response = await fetch('https://ezanvakti.herokuapp.com/vakitler/13880');
+	const response = await fetch('https://ezanvakti.emushaf.net/vakitler/13880');
 	const data = (await response.json()) as PrayerTimeResponse[];
 
 	return data;
