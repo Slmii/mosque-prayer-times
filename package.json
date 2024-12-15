@@ -7,8 +7,9 @@
 		"dev": "vite",
 		"build": "tsc && vite build",
 		"lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-		"format": "prettier --write \"src/**/*.{json,js,jsx,ts,tsx,css,scss}\" --ignore-path .prettierignore",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"format": "prettier --write \"./**/**/*.{json,js,jsx,ts,tsx,css,scss}\" --ignore-path .prettierignore",
+		"check-types": "tsc --noEmit"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.11.0",

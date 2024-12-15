@@ -4,7 +4,6 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useContext } from 'react';
-
 import { Appbar } from 'components/Appbar.component';
 import { Sliders } from 'components/Sliders.component';
 import { PrayerTimesContext } from 'lib/context/PrayerTimes.context';
