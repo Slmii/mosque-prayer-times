@@ -1,93 +1,91 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useRecoilState } from 'recoil';
-
-// import { useRandomHadithNumber } from 'lib/hooks/useRandomHadithNumber';
-// import { HadithResponse } from 'lib/types/Hadith';
 import { sliderState } from 'lib/recoil/slider.atom';
-import { SliderRepsonse, TimerResponse } from 'lib/types/Sliders';
-import { getImgFromHtmlString } from 'lib/utils/prayer-times.utilts';
+import { Announcement, Announcements, ApiAyah, QuranAyah } from 'lib/types/Sliders';
 import Stack from '@mui/material/Stack';
 
 export const Sliders = () => {
 	const [sliderIndex, setSliderIndex] = useRecoilState(sliderState);
 
-	const { data: sliders } = useQuery<SliderRepsonse[]>({
-		queryKey: ['sliders'],
-		refetchInterval: 10000,
-		queryFn: () => fetch('https://moskee-signage.cmswebdesign.nl/wp-json/wp/v2/posts/').then(res => res.json())
+	const { data: ayahs } = useQuery<QuranAyah[]>({
+		queryKey: ['ayahs'],
+		refetchInterval: 60000,
+		queryFn: () => fetch(`${import.meta.env.VITE_API_URL}/ayahs`).then(res => res.json())
 	});
 
-	const { data: timer } = useQuery<TimerResponse>({
-		queryKey: ['timer'],
-		enabled: !!sliders && sliders.length > 0,
-		queryFn: () =>
-			fetch('https://moskee-signage.cmswebdesign.nl/wp-json/wp/v2/instellingen_slider/77').then(res => res.json())
+	const { data: announcements } = useQuery<Announcement[]>({
+		queryKey: ['announcements'],
+		refetchInterval: 60000,
+		queryFn: async () => {
+			const response = await fetch(`${import.meta.env.VITE_API_URL}/announcements`);
+			const data = (await response.json()) as Announcements;
+
+			return Object.values(data).flat() as Announcement[];
+		}
 	});
 
-	// const hadithIndex = useRandomHadithNumber();
-	// const { data: hadiths } = useQuery<HadithResponse>({
-	// 	queryKey: ['hadiths'],
-	// 	enabled: !!sliders && sliders.length === 0,
-	// 	queryFn: () =>
-	// 		fetch('https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/tur-bukhari.json').then(res => res.json())
-	// });
+	const slidersCount = (ayahs?.length || 0) + (announcements?.length || 0);
+	const slider = useMemo(() => {
+		if (!ayahs || !announcements) {
+			return null;
+		}
+
+		const ayahsLength = ayahs.length;
+
+		// If current slider index is less than the ayahs length, return the ayah
+		if (sliderIndex < ayahsLength) {
+			return {
+				type: 'ayah',
+				slider: ayahs[sliderIndex]
+			};
+		}
+
+		// If current slider index is more than the ayahs length, return the announcement
+		return {
+			type: 'announcement',
+			slider: announcements[sliderIndex - ayahsLength]
+		};
+	}, [ayahs, announcements, sliderIndex]);
 
 	// Make interval that changes the index
 	useEffect(() => {
-		if (!timer || !sliders) {
+		if (!ayahs) {
 			return;
 		}
 
 		const interval = setInterval(() => {
 			setSliderIndex(prevIndex => prevIndex + 1);
-		}, Number(timer.acf.interval_in_seconden) * 1000);
+		}, 2000);
 
 		return () => {
 			clearInterval(interval);
 		};
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [timer, sliders]);
+	}, [ayahs]);
 
 	useEffect(() => {
 		// If index is the last index, set it to 0
-		if (sliders && sliderIndex === sliders.length) {
+		if (sliderIndex === slidersCount - 1) {
 			setSliderIndex(0);
 		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [sliderIndex, sliders?.length]);
+	}, [setSliderIndex, sliderIndex]);
 
 	return (
 		<>
-			{sliders ? (
+			{slider && (
 				<>
-					{sliders[sliderIndex] ? (
-						<>
-							{sliders[sliderIndex].tags.includes(5) ? (
-								<Box
-									component="img"
-									src={getImgFromHtmlString(sliders[sliderIndex].content.rendered)}
-									alt={sliders[sliderIndex].title.rendered}
-									width="50%"
-									height="100%"
-								/>
-							) : (
-								<Stack
-									height="100%"
-									alignItems="center"
-									justifyContent="center"
-									dangerouslySetInnerHTML={{
-										__html: sliders[sliderIndex].content.rendered
-									}}
-								/>
-							)}
-						</>
-					) : null}
-					{!!sliders.length && (
+					{slider.type === 'ayah' ? (
+						<AyahCard slider={slider.slider as QuranAyah} />
+					) : (
+						<Announcementcard slider={slider.slider as Announcement} />
+					)}
+					{!!slidersCount && (
 						<Box
 							sx={{
 								position: 'absolute',
@@ -97,12 +95,56 @@ export const Sliders = () => {
 							}}
 						>
 							<Typography variant="h3" fontWeight="bold">
-								{sliderIndex + 1} / {sliders.length}
+								{sliderIndex + 1} / {slidersCount}
 							</Typography>
 						</Box>
 					)}
 				</>
-			) : null}
+			)}
 		</>
+	);
+};
+
+const AyahCard = ({ slider }: { slider: QuranAyah }) => {
+	const { data, isError } = useQuery({
+		queryKey: ['ayah', slider.surah, slider.ayah],
+		queryFn: async () => {
+			const response = await fetch(
+				`https://api.alquran.cloud/v1/ayah/${slider.surah}:${slider.ayah}/${slider.language}`
+			);
+			return (await response.json()).data as ApiAyah;
+		}
+	});
+
+	if (!data || isError) {
+		return null;
+	}
+
+	return (
+		<Stack height="100%">
+			<Typography textAlign="center" variant="h2" fontSize={70} mb={10}>
+				{data.surah.englishName} | {data.surah.name}
+			</Typography>
+			<Typography textAlign="center" variant="h1" fontSize={78} fontWeight="bold">
+				{data.text}
+			</Typography>
+			<Typography textAlign="center" variant="h6" fontSize={40}>
+				{data.surah.number}:{slider.ayah}
+			</Typography>
+		</Stack>
+	);
+};
+
+const Announcementcard = ({ slider }: { slider: Announcement }) => {
+	return (
+		<Stack
+			height="100%"
+			width="100%"
+			alignItems="center"
+			justifyContent="center"
+			dangerouslySetInnerHTML={{
+				__html: slider.content
+			}}
+		/>
 	);
 };

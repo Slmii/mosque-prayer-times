@@ -12,15 +12,15 @@ export const RemainingTime = () => {
 	const [remaningTime, setRemainingTime] = useState<Date | null>(null);
 
 	useEffect(() => {
-		if (!nextPrayer) return;
+		if (!nextPrayer) {
+			return;
+		}
 
 		// If the next prayer is Imsak, we need to get the tomorrow's Imsak time
 		const nextPrayerDate =
 			nextPrayer === 'Imsak' && isToday(prayerTimes.today.date)
 				? getTomorrowDate(prayerTimes.tomorrow.Imsak)
 				: getTodayDate(prayerTimes.today[nextPrayer] as string);
-
-		console.log(prayerTimes);
 
 		const interval = setInterval(() => {
 			const currentDate = new Date();
@@ -49,7 +49,9 @@ export const RemainingTime = () => {
 
 	// Set the adhan back to false after 10 seconds
 	useEffect(() => {
-		if (!isAdhan) return;
+		if (!isAdhan) {
+			return;
+		}
 
 		const timeout = setTimeout(() => {
 			setIsAdhan(false);

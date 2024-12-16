@@ -79,11 +79,3 @@ export function getTomorrowDate(time: string) {
 
 	return tomorrowDateWithTimestamp;
 }
-
-export const getImgFromHtmlString = (htmlString: string) => {
-	const parser = new DOMParser();
-	const doc = parser.parseFromString(htmlString, 'text/html');
-	const img = doc.querySelector('img');
-
-	return img?.srcset.split(',').pop()?.split(' ')[1];
-};
