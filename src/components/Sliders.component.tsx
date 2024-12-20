@@ -69,7 +69,7 @@ export const Sliders = () => {
 
 	useEffect(() => {
 		// If index is the last index, set it to 0
-		if (sliderIndex === slidersCount - 1) {
+		if (sliderIndex > slidersCount - 1) {
 			setSliderIndex(0);
 		}
 
@@ -78,7 +78,7 @@ export const Sliders = () => {
 
 	return (
 		<>
-			{slider && (
+			{slider?.slider && (
 				<>
 					{slider.type === 'ayah' ? (
 						<AyahCard slider={slider.slider as QuranAyah} />
