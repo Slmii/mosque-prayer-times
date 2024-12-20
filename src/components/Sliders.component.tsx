@@ -13,7 +13,10 @@ export const Sliders = () => {
 	const { data: ayahs } = useQuery<QuranAyah[]>({
 		queryKey: ['ayahs'],
 		refetchInterval: 60000,
-		queryFn: () => fetch(`${import.meta.env.VITE_API_URL}/ayahs`).then(res => res.json())
+		queryFn: async () => {
+			const ayahs = (await fetch(`${import.meta.env.VITE_API_URL}/ayahs`).then(res => res.json())) as QuranAyah[];
+			return ayahs.filter(ayah => ayah.surah !== 0 && ayah.ayah !== 0);
+		}
 	});
 
 	const { data: announcements } = useQuery<Announcement[]>({
