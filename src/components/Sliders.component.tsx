@@ -71,8 +71,8 @@ export const Sliders = () => {
 	}, [ayahs]);
 
 	useEffect(() => {
-		// If index is the last index, set it to 0
-		if (sliderIndex > slidersCount - 1) {
+		// Reset
+		if (sliderIndex === slidersCount) {
 			setSliderIndex(0);
 		}
 
@@ -110,7 +110,7 @@ export const Sliders = () => {
 
 const AyahCard = ({ slider }: { slider: QuranAyah }) => {
 	const { data, isError } = useQuery({
-		queryKey: ['ayah', slider.surah, slider.ayah],
+		queryKey: ['ayah', slider.surah, slider.ayah, slider.language],
 		queryFn: async () => {
 			const response = await fetch(
 				`https://api.alquran.cloud/v1/ayah/${slider.surah}:${slider.ayah}/${slider.language}`
@@ -128,7 +128,7 @@ const AyahCard = ({ slider }: { slider: QuranAyah }) => {
 			<Typography textAlign="center" variant="h2" fontSize={70} mb={10}>
 				{data.surah.englishName} | {data.surah.name}
 			</Typography>
-			<Typography textAlign="center" variant="h1" fontSize={78} fontWeight="bold">
+			<Typography textAlign="center" variant="h1" fontSize={78} fontWeight="bold" mb={2}>
 				{data.text}
 			</Typography>
 			<Typography textAlign="center" variant="h6" fontSize={40}>
