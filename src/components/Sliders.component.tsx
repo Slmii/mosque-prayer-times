@@ -61,7 +61,7 @@ export const Sliders = () => {
 
 		const interval = setInterval(() => {
 			setSliderIndex(prevIndex => prevIndex + 1);
-		}, 2000);
+		}, 20000);
 
 		return () => {
 			clearInterval(interval);
