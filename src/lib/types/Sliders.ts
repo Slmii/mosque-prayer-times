@@ -4,6 +4,7 @@ export interface QuranAyah {
 	ayah: number;
 	language: string;
 	order: number;
+	completeSurah: boolean;
 	createdAt: Date;
 	updatedAt: Date;
 }
@@ -41,4 +42,17 @@ export interface ApiAyah {
 	number: number;
 	text: string;
 	surah: ApiSurah;
+}
+
+export interface ApiSingleSurah {
+	number: number;
+	name: string;
+	englishName: string;
+	englishNameTranslation: string;
+	numberOfAyahs: number;
+	revelationType: string;
+	ayahs: {
+		number: number;
+		text: string;
+	}[];
 }
