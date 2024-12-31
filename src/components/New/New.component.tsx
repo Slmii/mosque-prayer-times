@@ -52,8 +52,7 @@ export const New = () => {
 							alignItems="center"
 							justifyContent="flex-start"
 							flexWrap="wrap"
-							px={4}
-							py={2}
+							p={4}
 							borderRadius={5}
 							bgcolor="#192234"
 						>
