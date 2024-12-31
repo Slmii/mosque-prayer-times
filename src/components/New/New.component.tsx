@@ -27,14 +27,14 @@ export const New = () => {
 				<RemainingTime />
 				<Clock />
 			</Stack>
-			<Grid container spacing={2} height={{ xs: 'calc(100vh - 200px)', lg: 'unset' }}>
+			<Grid container spacing={4} height={{ xs: 'calc(100vh - 200px)', lg: 'unset' }}>
 				<Grid item xs={12} lg={3}>
 					<PrayerTimes />
 				</Grid>
-				<Grid item xs={6} display={{ xs: 'none', lg: 'block' }}>
+				<Grid item xs={7} display={{ xs: 'none', lg: 'block' }}>
 					<Sliders />
 				</Grid>
-				<Grid item xs={3} display={{ xs: 'none', lg: 'block' }}>
+				<Grid item xs={2} display={{ xs: 'none', lg: 'block' }}>
 					<QRCodes />
 				</Grid>
 			</Grid>
