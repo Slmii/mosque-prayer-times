@@ -27,7 +27,7 @@ export const New = () => {
 				<RemainingTime />
 				<Clock />
 			</Stack>
-			<Grid container spacing={2} height={{ xs: 'calc(100vh - 200px)' }}>
+			<Grid container spacing={2} height={{ xs: 'calc(100vh - 200px)', lg: 'unset' }}>
 				<Grid item xs={12} lg={3}>
 					<PrayerTimes />
 				</Grid>

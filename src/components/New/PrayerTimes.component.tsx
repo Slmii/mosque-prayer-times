@@ -14,7 +14,7 @@ export const PrayerTimes = () => {
 			p={{ xs: 2, lg: 4 }}
 			borderRadius={5}
 			bgcolor="#192234"
-			height="100%"
+			height={{ xs: '100%', lg: 'unset' }}
 		>
 			<PrayerTime prayer="Fadjr / İmsak" time={prayerTimes.today.Imsak} value="Imsak" />
 			<PrayerTime prayer="Shoeroeq / Güneş" time={prayerTimes.today.Gunes} value="Gunes" />
