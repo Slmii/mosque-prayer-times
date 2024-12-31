@@ -10,11 +10,11 @@ export const PrayerTimes = () => {
 		<Stack
 			direction="column"
 			alignItems="flex-start"
-			justifyContent="center"
-			px={4}
-			py={2}
+			justifyContent={{ xs: 'space-between', lg: 'flex-start' }}
+			p={{ xs: 2, lg: 4 }}
 			borderRadius={5}
 			bgcolor="#192234"
+			height="100%"
 		>
 			<PrayerTime prayer="Fadjr / İmsak" time={prayerTimes.today.Imsak} value="Imsak" />
 			<PrayerTime prayer="Shoeroeq / Güneş" time={prayerTimes.today.Gunes} value="Gunes" />
@@ -36,20 +36,20 @@ const PrayerTime = ({ prayer, time, value }: { prayer: string; time: string; val
 			justifyContent="space-between"
 			width="100%"
 			alignItems="center"
-			px={4}
-			py={2}
+			p={{ xs: 2, lg: 4 }}
 			sx={{
 				...(isActive && {
-					backgroundColor: '#253246',
-					border: '2px solid #fff',
-					borderRadius: 5
+					backgroundColor: '#1BA39C',
+					borderRadius: 5,
+					color: 'white',
+					textShadow: '3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000'
 				})
 			}}
 		>
-			<Typography variant="h4" fontWeight="bold">
+			<Typography variant="h4" fontWeight="bold" fontSize={{ xs: 24, lg: '2.125rem' }}>
 				{prayer}
 			</Typography>
-			<Typography variant="h3" fontWeight="bold">
+			<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 32, lg: '3rem' }}>
 				{time}
 			</Typography>
 		</Stack>

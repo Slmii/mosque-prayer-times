@@ -75,7 +75,7 @@ export const RemainingTime = () => {
 
 	return (
 		<Stack direction="column" alignItems="center">
-			<Typography variant="h1" fontSize={50} fontWeight="bold">
+			<Typography variant="h1" fontSize={{ xs: 24, lg: 50 }} fontWeight="bold">
 				{nextPrayer ? (
 					<>
 						{nextPrayer === 'Imsak' || nextPrayer === 'Gunes'
@@ -84,7 +84,7 @@ export const RemainingTime = () => {
 					</>
 				) : null}
 			</Typography>
-			<Typography variant="h1" fontSize={120} fontWeight="bold" textTransform="capitalize">
+			<Typography variant="h1" fontSize={{ xs: 88, lg: 120 }} fontWeight="bold" textTransform="capitalize">
 				{formattedRemainingTime}
 			</Typography>
 		</Stack>
