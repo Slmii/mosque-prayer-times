@@ -22,9 +22,9 @@ export const New = () => {
 				backgroundSize: 'cover',
 				backgroundRepeat: 'no-repeat',
 				color: 'white',
-				px: { xs: 2, lg: 8 },
+				px: { xs: 2, lg: 4 },
 				py: 4,
-				gap: { xs: 0, lg: 1 }
+				gap: { xs: 2, lg: 1 }
 			}}
 		>
 			{isAdhan ? (
