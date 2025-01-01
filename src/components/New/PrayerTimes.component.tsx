@@ -11,29 +11,39 @@ export const PrayerTimes = () => {
 	return (
 		<>
 			{isLgDown ? (
-				<Stack spacing={2} flexGrow={1} justifyContent="space-between">
-					<PrayerTime prayer="Fadjr / İmsak" time={prayerTimes.today.Imsak} value="Imsak" />
-					<PrayerTime prayer="Shoeroeq / Güneş" time={prayerTimes.today.Gunes} value="Gunes" />
-					<PrayerTime prayer="Dhoer / Öğle" time={prayerTimes.today.Ogle} value="Ogle" />
-					<PrayerTime prayer="'Asr / İkindi" time={prayerTimes.today.Ikindi} value="Ikindi" />
-					<PrayerTime prayer="Maghrib / Akşam" time={prayerTimes.today.Aksam} value="Aksam" />
-					<PrayerTime prayer="'Isjaa / Yatsı" time={prayerTimes.today.Yatsi} value="Yatsi" />
+				<Stack gap={2} flex={1} justifyContent="space-between">
+					<PrayerTime prayer="İmsak" subPrayer="Fadjr" time={prayerTimes.today.Imsak} value="Imsak" />
+					<PrayerTime prayer="Güneş" subPrayer="Shoeroeq" time={prayerTimes.today.Gunes} value="Gunes" />
+					<PrayerTime prayer="Öğle" subPrayer="Dhoer" time={prayerTimes.today.Ogle} value="Ogle" />
+					<PrayerTime prayer="İkindi" subPrayer="'Asr" time={prayerTimes.today.Ikindi} value="Ikindi" />
+					<PrayerTime prayer="Akşam" subPrayer="Maghrib" time={prayerTimes.today.Aksam} value="Aksam" />
+					<PrayerTime prayer="Yatsı" subPrayer="'Isjaa" time={prayerTimes.today.Yatsi} value="Yatsi" />
 				</Stack>
 			) : (
 				<Grid container spacing={4}>
-					<PrayerTime prayer="Fadjr / İmsak" time={prayerTimes.today.Imsak} value="Imsak" />
-					<PrayerTime prayer="Shoeroeq / Güneş" time={prayerTimes.today.Gunes} value="Gunes" />
-					<PrayerTime prayer="Dhoer / Öğle" time={prayerTimes.today.Ogle} value="Ogle" />
-					<PrayerTime prayer="'Asr / İkindi" time={prayerTimes.today.Ikindi} value="Ikindi" />
-					<PrayerTime prayer="Maghrib / Akşam" time={prayerTimes.today.Aksam} value="Aksam" />
-					<PrayerTime prayer="'Isjaa / Yatsı" time={prayerTimes.today.Yatsi} value="Yatsi" />
+					<PrayerTime prayer="İmsak" subPrayer="Fadjr" time={prayerTimes.today.Imsak} value="Imsak" />
+					<PrayerTime prayer="Güneş" subPrayer="Shoeroeq" time={prayerTimes.today.Gunes} value="Gunes" />
+					<PrayerTime prayer="Öğle" subPrayer="Dhoer" time={prayerTimes.today.Ogle} value="Ogle" />
+					<PrayerTime prayer="İkindi" subPrayer="'Asr" time={prayerTimes.today.Ikindi} value="Ikindi" />
+					<PrayerTime prayer="Akşam" subPrayer="Maghrib" time={prayerTimes.today.Aksam} value="Aksam" />
+					<PrayerTime prayer="Yatsı" subPrayer="'Isjaa" time={prayerTimes.today.Yatsi} value="Yatsi" />
 				</Grid>
 			)}
 		</>
 	);
 };
 
-const PrayerTime = ({ prayer, time, value }: { prayer: string; time: string; value: keyof IPrayerTimes }) => {
+const PrayerTime = ({
+	prayer,
+	subPrayer,
+	time,
+	value
+}: {
+	prayer: string;
+	subPrayer: string;
+	time: string;
+	value: keyof IPrayerTimes;
+}) => {
 	const { isLgDown } = useDevice();
 	const { activePrayer } = useContext(PrayerTimesContext);
 	const isActive = activePrayer === value;
@@ -41,34 +51,48 @@ const PrayerTime = ({ prayer, time, value }: { prayer: string; time: string; val
 	const ComponentToRender = (props: StackProps) => {
 		return (
 			<Stack
-				direction="row"
-				alignItems="center"
-				justifyContent="space-between"
-				p={4}
+				direction="column"
+				alignItems="flex-start"
+				justifyContent="center"
+				p={2}
 				bgcolor="#2C3344"
-				borderRadius={4}
+				borderRadius={2}
 				{...props}
 				sx={{
+					background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1))',
+					backdropFilter: 'blur(10px)',
+					border: '1px solid rgba(255, 255, 255, 0.3)',
 					...(isActive && {
-						backgroundColor: '#1BA39C',
-						color: 'white',
+						background: '#1BA39C',
 						textShadow: '3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000'
 					}),
 					...props.sx
 				}}
 			>
-				<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 24, lg: '3.5rem' }}>
-					{prayer}
-				</Typography>
-				<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 24, lg: '3.5rem' }}>
-					{time}
+				<Stack direction="row" alignItems="center" justifyContent="space-between" width="100%">
+					<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 24, lg: '5rem' }}>
+						{prayer}
+					</Typography>
+					<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 24, lg: '5rem' }}>
+						{time}
+					</Typography>
+				</Stack>
+				<Typography
+					variant="body1"
+					fontWeight="bold"
+					sx={{
+						opacity: isActive ? 1 : 0.5,
+						fontSize: theme => ({ xs: theme.typography.body1.fontSize, lg: 24 })
+					}}
+				>
+					{subPrayer}
 				</Typography>
 			</Stack>
 		);
 	};
 
 	if (isLgDown) {
-		return <ComponentToRender flexGrow={1} />;
+		return <ComponentToRender flex={1} />;
 	}
 
 	return (

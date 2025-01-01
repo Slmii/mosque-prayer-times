@@ -84,7 +84,7 @@ export const RemainingTime = () => {
 					</>
 				) : null}
 			</Typography>
-			<Typography variant="h1" fontSize={{ xs: 88, lg: 120 }} fontWeight="bold" textTransform="capitalize">
+			<Typography variant="h1" fontSize={{ xs: 80, lg: 120 }} fontWeight="bold" textTransform="capitalize">
 				{formattedRemainingTime}
 			</Typography>
 		</Stack>

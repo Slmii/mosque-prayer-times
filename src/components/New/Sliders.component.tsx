@@ -85,24 +85,16 @@ export const Sliders = () => {
 		<Stack
 			bgcolor="#ffffff"
 			p={4}
-			borderRadius={5}
+			borderRadius={2}
 			minHeight="calc(100vh - 950px)"
 			alignItems="center"
 			justifyContent="center"
-			sx={{
-				overflowY: 'auto'
-			}}
 		>
 			{slider.type === 'ayah' ? (
 				<AyahCard slider={slider.slider as QuranAyah} />
 			) : (
 				<Announcementcard slider={slider.slider as Announcement} />
 			)}
-			{/* {!!slidersCount && (
-				<Typography textAlign="center" variant="h6" fontSize={20} mt={6} fontWeight="bold" color="#000000">
-					{sliderIndex + 1} / {slidersCount}
-				</Typography>
-			)} */}
 		</Stack>
 	);
 };

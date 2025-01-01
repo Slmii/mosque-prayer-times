@@ -1,24 +1,49 @@
 export interface WeatherResponse {
-	latitude: number;
-	longitude: number;
-	generationtime_ms: number;
-	utc_offset_seconds: number;
-	timezone: string;
-	timezone_abbreviation: string;
-	elevation: number;
-	hourly_units: {
-		time: string;
-		temperature_2m: string;
+	coord: {
+		lon: number;
+		lat: number;
 	};
-	hourly: {
-		time: string[];
-		temperature_2m: number[];
+	weather: { id: number; main: string; description: string; icon: string }[];
+	base: string;
+	main: {
+		temp: number;
+		feels_like: number;
+		temp_min: number;
+		temp_max: number;
+		pressure: number;
+		humidity: number;
+		sea_level: number;
+		grnd_level: number;
 	};
+	visibility: number;
+	wind: {
+		speed: number;
+		deg: number;
+		gust: number;
+	};
+	rain: {
+		'1h': number;
+	};
+	clouds: {
+		all: number;
+	};
+	dt: number;
+	sys: {
+		type: number;
+		id: number;
+		country: string;
+		sunrise: number;
+		sunset: number;
+	};
+	timezone: number;
+	id: number;
+	name: string;
+	cod: number;
 }
 
 export const getWeather = async () => {
 	const response = await fetch(
-		'https://api.open-meteo.com/v1/forecast?latitude=52.7792&longitude=6.9069&hourly=temperature_2m&daily=weather_code&timezone=Europe%2FBerlin'
+		'https://api.openweathermap.org/data/2.5/weather?lat=52.78576280266427&lon=6.891952075836978&units=metric&appid=57e953ad2910b108d1ee733913170c02'
 	);
 	const data = (await response.json()) as WeatherResponse;
 
