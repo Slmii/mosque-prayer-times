@@ -74,7 +74,7 @@ const PrayerTime = ({
 					<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 24, lg: '4rem' }} lineHeight={1}>
 						{prayer}
 					</Typography>
-					<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 24, lg: '5rem' }} lineHeight={1}>
+					<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 24, lg: 100 }} lineHeight={1}>
 						{time}
 					</Typography>
 				</Stack>
