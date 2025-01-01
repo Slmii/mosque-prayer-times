@@ -19,8 +19,6 @@ export const New = () => {
 			sx={{
 				minHeight: '100vh',
 				backgroundColor: '#0f172a',
-				backgroundSize: 'cover',
-				backgroundRepeat: 'no-repeat',
 				color: 'white',
 				px: { xs: 2, lg: 4 },
 				py: 4,
