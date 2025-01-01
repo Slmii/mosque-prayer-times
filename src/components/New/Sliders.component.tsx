@@ -168,6 +168,7 @@ const Announcementcard = ({ slider }: { slider: Announcement }) => {
 			width="100%"
 			alignItems="center"
 			justifyContent="center"
+			color="#000000"
 			dangerouslySetInnerHTML={{
 				__html: slider.content
 			}}
