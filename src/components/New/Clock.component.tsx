@@ -72,6 +72,9 @@ export const Clock = () => {
 
 	return (
 		<Stack alignItems="center">
+			<Typography variant="h4" textTransform="capitalize" fontWeight="bold">
+				{prayerTimes.today.HicriDate}
+			</Typography>
 			<Typography variant="h2" fontSize={50} fontWeight="bold" textTransform="capitalize">
 				{new Intl.DateTimeFormat(LOCALE, {
 					year: 'numeric',

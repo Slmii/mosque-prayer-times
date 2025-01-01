@@ -83,7 +83,7 @@ export const Sliders = () => {
 
 	return (
 		<Stack
-			bgcolor="#2C3344"
+			bgcolor="#ffffff"
 			p={4}
 			borderRadius={5}
 			height="calc(100vh - 850px)"
@@ -99,7 +99,7 @@ export const Sliders = () => {
 				<Announcementcard slider={slider.slider as Announcement} />
 			)}
 			{!!slidersCount && (
-				<Typography textAlign="center" variant="h6" fontSize={20} mt={6} fontWeight="bold">
+				<Typography textAlign="center" variant="h6" fontSize={20} mt={6} fontWeight="bold" color="#000000">
 					{sliderIndex + 1} / {slidersCount}
 				</Typography>
 			)}
@@ -159,10 +159,10 @@ const AyahCard = ({ slider }: { slider: QuranAyah }) => {
 
 	return (
 		<>
-			<Typography textAlign="center" variant="h1" fontSize={64} fontWeight="bold" mb={2}>
+			<Typography textAlign="center" variant="h1" fontSize={64} fontWeight="bold" mb={2} color="#000000">
 				{data.text}
 			</Typography>
-			<Typography textAlign="center" variant="h6" fontSize={32} sx={{ opacity: 0.7 }}>
+			<Typography textAlign="center" variant="h6" fontSize={32} sx={{ opacity: 0.7 }} color="#000000">
 				{data.name} {data.verse}
 			</Typography>
 		</>
