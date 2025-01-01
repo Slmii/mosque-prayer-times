@@ -72,7 +72,7 @@ export const Clock = () => {
 
 	return (
 		<Stack alignItems="center">
-			<Typography variant="h4" textTransform="capitalize" fontWeight="bold">
+			<Typography variant="h2" fontSize={50} fontWeight="bold" textTransform="capitalize">
 				{prayerTimes.today.HicriDate}
 			</Typography>
 			<Typography variant="h2" fontSize={50} fontWeight="bold" textTransform="capitalize">

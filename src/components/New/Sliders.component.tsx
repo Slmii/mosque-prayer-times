@@ -86,7 +86,7 @@ export const Sliders = () => {
 			bgcolor="#ffffff"
 			p={4}
 			borderRadius={5}
-			height="calc(100vh - 850px)"
+			// height="calc(100vh - 850px)"
 			alignItems="center"
 			justifyContent="center"
 			sx={{
@@ -98,11 +98,11 @@ export const Sliders = () => {
 			) : (
 				<Announcementcard slider={slider.slider as Announcement} />
 			)}
-			{!!slidersCount && (
+			{/* {!!slidersCount && (
 				<Typography textAlign="center" variant="h6" fontSize={20} mt={6} fontWeight="bold" color="#000000">
 					{sliderIndex + 1} / {slidersCount}
 				</Typography>
-			)}
+			)} */}
 		</Stack>
 	);
 };
