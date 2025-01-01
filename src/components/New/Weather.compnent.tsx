@@ -50,7 +50,7 @@ export const Weather = () => {
 			gap={2}
 			alignItems="center"
 			justifyContent="center"
-			bgcolor="#192234"
+			bgcolor="#2C3344"
 		>
 			<WbSunnyIcon fontSize="large" />
 			<Typography variant="h2" fontWeight="bold" textTransform="capitalize">

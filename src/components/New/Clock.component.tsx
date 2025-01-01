@@ -4,7 +4,6 @@ import { LOCALE } from 'lib/constants';
 import { PrayerTimesContext } from 'lib/context/PrayerTimes.context';
 import { isAfter, isBefore, isBetween } from 'lib/utils/prayer-times.utilts';
 import Stack from '@mui/material/Stack';
-import { Weather } from 'components/New/Weather.compnent';
 
 export const Clock = () => {
 	const { setActivePrayer, prayerTimes, activePrayer, setNextPrayer } = useContext(PrayerTimesContext);
@@ -65,24 +64,18 @@ export const Clock = () => {
 	);
 
 	return (
-		<Stack direction="row" alignItems="flex-start" gap={6} display={{ xs: 'none', lg: 'flex' }}>
-			<Stack alignItems="center">
-				<Typography variant="h5" fontWeight="bold" textTransform="capitalize" sx={{ opacity: 0.7 }}>
-					{prayerTimes.today.HicriDate}
-				</Typography>
-				<Typography variant="h2" fontSize={50} fontWeight="bold" textTransform="capitalize">
-					{new Intl.DateTimeFormat(LOCALE, {
-						year: 'numeric',
-						month: 'long',
-						day: 'numeric',
-						weekday: 'long'
-					}).format(new Date())}
-				</Typography>
-				<Typography variant="h1" fontSize={120} fontWeight="bold" textTransform="capitalize">
-					{formattedTime}
-				</Typography>
-			</Stack>
-			<Weather />
+		<Stack alignItems="center">
+			<Typography variant="h2" fontSize={50} fontWeight="bold" textTransform="capitalize">
+				{new Intl.DateTimeFormat(LOCALE, {
+					year: 'numeric',
+					month: 'long',
+					day: 'numeric',
+					weekday: 'long'
+				}).format(new Date())}
+			</Typography>
+			<Typography variant="h1" fontSize={120} fontWeight="bold" textTransform="capitalize">
+				{formattedTime}
+			</Typography>
 		</Stack>
 	);
 };

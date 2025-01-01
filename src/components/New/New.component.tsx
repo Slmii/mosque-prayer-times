@@ -1,21 +1,26 @@
 import Stack from '@mui/material/Stack';
 import { Clock } from 'components/New/Clock.component';
 import { RemainingTime } from 'components/New/RemainingTime.component';
-import Grid from '@mui/material/Grid';
 import { PrayerTimes } from 'components/New/PrayerTimes.component';
 import { Sliders } from 'components/New/Sliders.component';
 import { QRCodes } from 'components/New/QRCodes.component';
+import { Weather } from 'components/New/Weather.compnent';
+import { useDevice } from 'lib/hooks/useDevice';
 
 export const New = () => {
+	const { isLgDown } = useDevice();
+
 	return (
 		<Stack
 			sx={{
 				minHeight: '100vh',
-				background: '#0f172a',
+				background: 'linear-gradient(135deg, #0f172a, #1e293b)',
+				backgroundSize: 'cover',
+				backgroundRepeat: 'no-repeat',
 				color: 'white',
 				px: { xs: 2, lg: 8 },
 				py: 4,
-				gap: { xs: 2 }
+				gap: 4
 			}}
 		>
 			<Stack
@@ -25,19 +30,16 @@ export const New = () => {
 				width="100%"
 			>
 				<RemainingTime />
-				<Clock />
+				{!isLgDown && (
+					<>
+						<Weather />
+						<Clock />
+					</>
+				)}
 			</Stack>
-			<Grid container spacing={4} height={{ xs: 'calc(100vh - 200px)', lg: 'unset' }}>
-				<Grid item xs={12} lg={3}>
-					<PrayerTimes />
-				</Grid>
-				<Grid item xs={7} display={{ xs: 'none', lg: 'block' }}>
-					<Sliders />
-				</Grid>
-				<Grid item xs={2} display={{ xs: 'none', lg: 'block' }}>
-					<QRCodes />
-				</Grid>
-			</Grid>
+			<PrayerTimes />
+			{!isLgDown && <Sliders />}
+			{!isLgDown && <QRCodes />}
 		</Stack>
 	);
 };

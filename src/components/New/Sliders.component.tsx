@@ -82,7 +82,17 @@ export const Sliders = () => {
 	}
 
 	return (
-		<Stack bgcolor="#192234" p={4} borderRadius={5}>
+		<Stack
+			bgcolor="#2C3344"
+			p={4}
+			borderRadius={5}
+			height="calc(100vh - 850px)"
+			alignItems="center"
+			justifyContent="center"
+			sx={{
+				overflowY: 'auto'
+			}}
+		>
 			{slider.type === 'ayah' ? (
 				<AyahCard slider={slider.slider as QuranAyah} />
 			) : (
@@ -149,10 +159,10 @@ const AyahCard = ({ slider }: { slider: QuranAyah }) => {
 
 	return (
 		<>
-			<Typography textAlign="center" variant="h1" fontSize={58} fontWeight="bold" mb={2}>
+			<Typography textAlign="center" variant="h1" fontSize={64} fontWeight="bold" mb={2}>
 				{data.text}
 			</Typography>
-			<Typography textAlign="center" variant="h6" fontSize={25} sx={{ opacity: 0.7 }}>
+			<Typography textAlign="center" variant="h6" fontSize={32} sx={{ opacity: 0.7 }}>
 				{data.name} {data.verse}
 			</Typography>
 		</>
