@@ -4,10 +4,13 @@ import { LOCALE } from 'lib/constants';
 import { PrayerTimesContext } from 'lib/context/PrayerTimes.context';
 import { isAfter, isBefore, isBetween } from 'lib/utils/prayer-times.utilts';
 import Stack from '@mui/material/Stack';
+import { useDevice } from 'lib/hooks/useDevice';
 
 export const Clock = () => {
 	const { setActivePrayer, prayerTimes, activePrayer, setNextPrayer } = useContext(PrayerTimesContext);
 	const [currentTime, setCurrentTime] = useState(new Date());
+
+	const { isLgDown } = useDevice();
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -62,6 +65,10 @@ export const Clock = () => {
 			}),
 		[currentTime]
 	);
+
+	if (isLgDown) {
+		return null;
+	}
 
 	return (
 		<Stack alignItems="center">

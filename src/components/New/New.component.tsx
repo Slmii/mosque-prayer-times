@@ -30,12 +30,8 @@ export const New = () => {
 				width="100%"
 			>
 				<RemainingTime />
-				{!isLgDown && (
-					<>
-						<Weather />
-						<Clock />
-					</>
-				)}
+				{!isLgDown && <Weather />}
+				<Clock />
 			</Stack>
 			<PrayerTimes />
 			{!isLgDown && <Sliders />}
