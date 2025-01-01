@@ -70,16 +70,17 @@ const PrayerTime = ({
 				}}
 			>
 				<Stack direction="row" alignItems="center" justifyContent="space-between" width="100%">
-					<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 24, lg: '4rem' }}>
+					<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 24, lg: '4rem' }} lineHeight={1}>
 						{prayer}
 					</Typography>
-					<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 24, lg: '5rem' }}>
+					<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 24, lg: '5rem' }} lineHeight={1}>
 						{time}
 					</Typography>
 				</Stack>
 				<Typography
 					variant="body1"
 					fontWeight="bold"
+					lineHeight={1}
 					sx={{
 						opacity: isActive ? 1 : 0.5,
 						fontSize: theme => ({ xs: theme.typography.body1.fontSize, lg: 24 })
