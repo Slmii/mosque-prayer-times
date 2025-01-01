@@ -15,6 +15,10 @@ const QR_LINKS = [
 	{
 		label: 'Camiye Bağış / Donatie Moskee',
 		link: 'https://betaalverzoek.rabobank.nl/betaalverzoek/?id=OHIeKVpERniSu6fB2bSNcg'
+	},
+	{
+		label: 'Üye ol / Word lid',
+		link: 'https://www.yildirim-beyazit.nl/membership'
 	}
 ];
 
