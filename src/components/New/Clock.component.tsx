@@ -71,11 +71,11 @@ export const Clock = () => {
 	}
 
 	return (
-		<Stack alignItems="center">
-			<Typography variant="h2" fontSize={35} fontWeight="bold" textTransform="capitalize">
+		<Stack alignItems="flex-end">
+			<Typography variant="h2" fontSize={35} fontWeight="bold" textTransform="capitalize" lineHeight={1}>
 				{prayerTimes.today.HicriDate}
 			</Typography>
-			<Typography variant="h2" fontSize={50} fontWeight="bold" textTransform="capitalize">
+			<Typography variant="h2" fontSize={50} fontWeight="bold" textTransform="capitalize" lineHeight={1}>
 				{new Intl.DateTimeFormat(LOCALE, {
 					year: 'numeric',
 					month: 'long',
@@ -83,7 +83,7 @@ export const Clock = () => {
 					weekday: 'long'
 				}).format(new Date())}
 			</Typography>
-			<Typography variant="h1" fontSize={120} fontWeight="bold" textTransform="capitalize">
+			<Typography variant="h1" fontSize={120} fontWeight="bold" textTransform="capitalize" lineHeight={1}>
 				{formattedTime}
 			</Typography>
 		</Stack>
