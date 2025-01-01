@@ -70,7 +70,7 @@ const PrayerTime = ({
 				}}
 			>
 				<Stack direction="row" alignItems="center" justifyContent="space-between" width="100%">
-					<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 24, lg: '5rem' }}>
+					<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 24, lg: '4rem' }}>
 						{prayer}
 					</Typography>
 					<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 24, lg: '5rem' }}>
