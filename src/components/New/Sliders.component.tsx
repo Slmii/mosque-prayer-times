@@ -86,7 +86,7 @@ export const Sliders = () => {
 			bgcolor="#ffffff"
 			p={4}
 			borderRadius={5}
-			height="calc(100vh - 850px)"
+			minHeight="calc(100vh - 950px)"
 			alignItems="center"
 			justifyContent="center"
 			sx={{
