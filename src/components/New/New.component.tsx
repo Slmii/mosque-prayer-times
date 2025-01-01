@@ -24,7 +24,7 @@ export const New = () => {
 				color: 'white',
 				px: { xs: 2, lg: 4 },
 				py: 4,
-				gap: { xs: 2, lg: 1 }
+				gap: 2
 			}}
 		>
 			{isAdhan ? (
