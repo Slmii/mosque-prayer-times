@@ -63,7 +63,7 @@ const PrayerTime = ({
 					backdropFilter: 'blur(10px)',
 					border: '1px solid rgba(255, 255, 255, 0.3)',
 					...(isActive && {
-						background: '#1BA39C',
+						background: 'linear-gradient(135deg, rgba(27, 163, 156, 0.8), rgba(27, 163, 156, 0.6))',
 						textShadow: '3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000'
 					}),
 					...props.sx
