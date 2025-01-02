@@ -7,7 +7,7 @@ import { PrayerTimesContext } from 'lib/context/PrayerTimes.context';
 import { getTodayDate, getTomorrowDate, translations } from 'lib/utils/prayer-times.utilts';
 
 export const RemainingTime = () => {
-	const { nextPrayer, prayerTimes, isAdhan, setIsAdhan, activePrayer } = useContext(PrayerTimesContext);
+	const { nextPrayer, prayerTimes, setIsAdhan, activePrayer } = useContext(PrayerTimesContext);
 	const [remaningTime, setRemainingTime] = useState<Date | null>(null);
 
 	useEffect(() => {
@@ -45,21 +45,6 @@ export const RemainingTime = () => {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [nextPrayer, prayerTimes]);
-
-	// Set the adhan back to false after 10 seconds
-	useEffect(() => {
-		if (!isAdhan) {
-			return;
-		}
-
-		const timeout = setTimeout(() => {
-			setIsAdhan(false);
-		}, 10000);
-
-		return () => clearTimeout(timeout);
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isAdhan]);
 
 	const formattedRemainingTime = useMemo(() => {
 		if (!remaningTime) {

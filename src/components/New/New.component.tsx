@@ -7,7 +7,7 @@ import { QRCodes } from 'components/New/QRCodes.component';
 import { Weather } from 'components/New/Weather.compnent';
 import { useDevice } from 'lib/hooks/useDevice';
 import { PrayerTimesContext } from 'lib/context/PrayerTimes.context';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Typography from '@mui/material/Typography';
 
 export const New = () => {
@@ -49,13 +49,30 @@ export const New = () => {
 };
 
 const Adhan = () => {
+	const { isAdhan, setIsAdhan } = useContext(PrayerTimesContext);
+
+	// Set the adhan back to false after 10 seconds
+	useEffect(() => {
+		if (!isAdhan) {
+			return;
+		}
+
+		const timeout = setTimeout(() => {
+			setIsAdhan(false);
+		}, 10000);
+
+		return () => clearTimeout(timeout);
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isAdhan]);
+
 	return (
 		<Stack
 			direction="column"
 			alignContent="center"
 			textAlign="center"
 			justifyContent="center"
-			borderRadius={5}
+			borderRadius={2}
 			height="calc(100vh - 65px)"
 			sx={{
 				animation: 'flicker 1.5s infinite',
