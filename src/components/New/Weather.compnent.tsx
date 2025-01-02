@@ -29,7 +29,7 @@ export const Weather = () => {
 				alt="weather"
 				onError={e => (e.currentTarget.src = 'https://openweathermap.org/img/wn/01d.png')}
 			/>
-			<Typography variant="h2" fontWeight="bold" textTransform="capitalize">
+			<Typography variant="h1" fontWeight="bold" textTransform="capitalize">
 				{data ? Math.floor(data.main.temp) : '-'}°C
 			</Typography>
 		</Stack>

@@ -84,7 +84,7 @@ const PrayerTime = ({
 					lineHeight={1}
 					sx={{
 						opacity: isActive ? 1 : 0.5,
-						fontSize: theme => ({ xs: theme.typography.body1.fontSize, lg: 24 })
+						fontSize: theme => ({ xs: theme.typography.body1.fontSize, lg: 44 })
 					}}
 				>
 					{subPrayer}
