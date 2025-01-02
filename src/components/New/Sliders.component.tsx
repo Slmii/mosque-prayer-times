@@ -151,7 +151,7 @@ const AyahCard = ({ slider }: { slider: QuranAyah }) => {
 
 	return (
 		<>
-			<Typography textAlign="center" variant="h1" fontSize={64} fontWeight="bold" mb={2} color="#000000">
+			<Typography textAlign="center" variant="h1" fontSize={60} fontWeight="bold" mb={2} color="#000000">
 				{data.text}
 			</Typography>
 			<Typography textAlign="center" variant="h6" fontSize={32} sx={{ opacity: 0.7 }} color="#000000">
