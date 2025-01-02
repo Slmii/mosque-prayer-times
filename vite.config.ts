@@ -2,11 +2,13 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
+import vercel from 'vite-plugin-vercel';
 
 // https://vitejs.dev/config/
 export default defineConfig({
 	plugins: [
 		react(),
+		vercel(),
 		VitePWA({
 			includeAssets: [
 				'favicon.ico',
@@ -65,5 +67,24 @@ export default defineConfig({
 	},
 	server: {
 		port: 3000
+	},
+	vercel: {
+		rewrites: [
+			{
+				source: '/(.*)',
+				destination: '/'
+			}
+		],
+		headers: [
+			{
+				source: '/(.*)',
+				headers: [
+					{
+						key: 'Cache-Control',
+						value: 'no-store, max-age=0, must-revalidate'
+					}
+				]
+			}
+		]
 	}
 });
