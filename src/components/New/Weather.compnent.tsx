@@ -31,7 +31,7 @@ export const Weather = () => {
 				onError={e => (e.currentTarget.src = 'https://openweathermap.org/img/wn/01d.png')}
 			/>
 			<Typography variant="h1" fontWeight="bold" textTransform="capitalize">
-				{data ? Math.floor(data.main.temp) : '-'}°C TEST
+				{data ? Math.floor(data.main.temp) : '-'}°C
 			</Typography>
 		</Stack>
 	);
