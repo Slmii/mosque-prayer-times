@@ -22,7 +22,7 @@ export const New = () => {
 				color: 'white',
 				px: { xs: 2, lg: 4 },
 				py: 4,
-				gap: 2
+				gap: { xs: 2, lg: 4 }
 			}}
 		>
 			{isAdhan ? (
@@ -39,11 +39,9 @@ export const New = () => {
 						{!isLgDown && <Weather />}
 						<Clock />
 					</Stack>
-					<Stack gap={4}>
-						<PrayerTimes />
-						{!isLgDown && <Sliders />}
-						{!isLgDown && <QRCodes />}
-					</Stack>
+					<PrayerTimes />
+					{!isLgDown && <Sliders />}
+					{!isLgDown && <QRCodes />}
 				</>
 			)}
 		</Stack>
