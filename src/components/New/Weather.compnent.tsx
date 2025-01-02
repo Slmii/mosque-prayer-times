@@ -15,6 +15,7 @@ export const Weather = () => {
 			borderRadius={2}
 			direction="row"
 			pr={4}
+			py={2}
 			gap={2}
 			alignItems="center"
 			justifyContent="center"
