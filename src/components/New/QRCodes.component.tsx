@@ -1,4 +1,3 @@
-import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import QRCode from 'react-qr-code';
@@ -27,14 +26,9 @@ export const QRCodes = () => {
 		<Stack direction="row" alignItems="center" justifyContent="center" gap={10}>
 			{QR_LINKS.map(qr => (
 				<Stack alignItems="center" key={qr.link}>
-					<Box bgcolor="white" p={1} borderRadius={2} width="100%" maxWidth={150}>
-						<QRCode
-							size={256}
-							style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
-							value={qr.link}
-							viewBox={`0 0 256 256`}
-						/>
-					</Box>
+					<Stack alignItems="center" bgcolor="white" p={1} borderRadius={2}>
+						<QRCode size={150} value={qr.link} viewBox={`0 0 256 256`} />
+					</Stack>
 					<Typography textAlign="center" variant="h6" mt={0.5}>
 						{qr.label}
 					</Typography>
