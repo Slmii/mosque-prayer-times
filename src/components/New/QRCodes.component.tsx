@@ -27,7 +27,7 @@ export const QRCodes = () => {
 		<Stack direction="row" alignItems="center" justifyContent="center" gap={10}>
 			{QR_LINKS.map(qr => (
 				<Stack alignItems="center" key={qr.link}>
-					<Box bgcolor="white" p={2} borderRadius={2} width="100%" maxWidth={150}>
+					<Box bgcolor="white" p={1} borderRadius={2} width="100%" maxWidth={150}>
 						<QRCode
 							size={256}
 							style={{ height: 'auto', maxWidth: '100%', width: '100%' }}
