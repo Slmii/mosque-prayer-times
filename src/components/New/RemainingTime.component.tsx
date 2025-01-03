@@ -7,7 +7,7 @@ import { PrayerTimesContext } from 'lib/context/PrayerTimes.context';
 import { getTodayDate, getTomorrowDate, translations } from 'lib/utils/prayer-times.utilts';
 
 export const RemainingTime = () => {
-	const { nextPrayer, prayerTimes, setIsAdhan, activePrayer } = useContext(PrayerTimesContext);
+	const { nextPrayer, prayerTimes, isAdhan, setIsAdhan, activePrayer } = useContext(PrayerTimesContext);
 	const [remaningTime, setRemainingTime] = useState<Date | null>(null);
 
 	useEffect(() => {
@@ -28,8 +28,8 @@ export const RemainingTime = () => {
 			const differenceDate = new Date(diff);
 			// If the difference is 0, it means that the prayer time has come
 			if (differenceDate.getHours() === 0 && differenceDate.getMinutes() === 0 && differenceDate.getSeconds() === 0) {
-				// If the active prayer is Gunes, we don't need to activate adhan
-				if (activePrayer !== 'Gunes') {
+				// If the active prayer is Gunes or Imsak, we don't need to activate adhan
+				if (activePrayer !== 'Gunes' && activePrayer !== 'Imsak') {
 					setIsAdhan(true);
 				}
 
@@ -45,6 +45,21 @@ export const RemainingTime = () => {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [nextPrayer, prayerTimes]);
+
+	// Set the adhan back to false after 10 seconds
+	useEffect(() => {
+		if (!isAdhan) {
+			return;
+		}
+
+		const timeout = setTimeout(() => {
+			setIsAdhan(false);
+		}, 10000);
+
+		return () => clearTimeout(timeout);
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isAdhan]);
 
 	const formattedRemainingTime = useMemo(() => {
 		if (!remaningTime) {

@@ -7,7 +7,7 @@ import { QRCodes } from 'components/New/QRCodes.component';
 import { Weather } from 'components/New/Weather.compnent';
 import { useDevice } from 'lib/hooks/useDevice';
 import { PrayerTimesContext } from 'lib/context/PrayerTimes.context';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import Typography from '@mui/material/Typography';
 
 export const New = () => {
@@ -26,19 +26,13 @@ export const New = () => {
 			}}
 		>
 			{isAdhan ? (
-				<Adhan />
+				<>
+					<Header />
+					<Adhan />
+				</>
 			) : (
 				<>
-					<Stack
-						direction={{ xs: 'column', lg: 'row' }}
-						alignItems={{ xs: 'center', lg: 'flex-start' }}
-						justifyContent={{ xs: 'center', lg: 'space-between' }}
-						width="100%"
-					>
-						<RemainingTime />
-						{!isLgDown && <Weather />}
-						<Clock />
-					</Stack>
+					<Header />
 					<PrayerTimes />
 					{!isLgDown && <Sliders />}
 					{!isLgDown && <QRCodes />}
@@ -48,24 +42,24 @@ export const New = () => {
 	);
 };
 
+const Header = () => {
+	const { isLgDown } = useDevice();
+
+	return (
+		<Stack
+			direction={{ xs: 'column', lg: 'row' }}
+			alignItems={{ xs: 'center', lg: 'flex-start' }}
+			justifyContent={{ xs: 'center', lg: 'space-between' }}
+			width="100%"
+		>
+			<RemainingTime />
+			{!isLgDown && <Weather />}
+			<Clock />
+		</Stack>
+	);
+};
+
 const Adhan = () => {
-	const { isAdhan, setIsAdhan } = useContext(PrayerTimesContext);
-
-	// Set the adhan back to false after 10 seconds
-	useEffect(() => {
-		if (!isAdhan) {
-			return;
-		}
-
-		const timeout = setTimeout(() => {
-			setIsAdhan(false);
-		}, 10000);
-
-		return () => clearTimeout(timeout);
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isAdhan]);
-
 	return (
 		<Stack
 			direction="column"
@@ -73,7 +67,7 @@ const Adhan = () => {
 			textAlign="center"
 			justifyContent="center"
 			borderRadius={2}
-			height="calc(100vh - 65px)"
+			height="calc(100vh - 310px)"
 			sx={{
 				animation: 'flicker 1.5s infinite',
 				'@keyframes flicker': {
