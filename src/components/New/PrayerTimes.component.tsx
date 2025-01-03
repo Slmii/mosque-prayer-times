@@ -62,33 +62,34 @@ const PrayerTime = ({
 					background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1))',
 					backdropFilter: 'blur(10px)',
 					border: '1px solid rgba(255, 255, 255, 0.3)',
+					textShadow: '3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000',
 					...(isActive && {
-						background: 'linear-gradient(135deg, rgba(27, 163, 156, 0.8), rgba(27, 163, 156, 0.6))',
-						border: '1px solid rgba(255, 255, 255, 0.3)',
-						textShadow: '3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000'
+						background: 'linear-gradient(135deg, rgba(27, 163, 156, 0.8), rgba(27, 163, 156, 0.6))'
 					}),
 					...props.sx
 				}}
 			>
-				<Stack direction="row" alignItems="center" justifyContent="space-between" width="100%">
-					<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 24, lg: '4rem' }} lineHeight={1}>
-						{prayer}
-					</Typography>
+				<Stack direction="row" alignItems="flex-start" justifyContent="space-between" width="100%">
+					<Stack>
+						<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 24, lg: '4rem' }}>
+							{prayer}
+						</Typography>
+						<Typography
+							variant="body1"
+							fontWeight="bold"
+							lineHeight={1}
+							sx={{
+								opacity: isActive ? 1 : 0.5,
+								fontSize: theme => ({ xs: theme.typography.body1.fontSize, lg: 44 })
+							}}
+						>
+							{subPrayer}
+						</Typography>
+					</Stack>
 					<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 24, lg: 100 }} lineHeight={1}>
 						{time}
 					</Typography>
 				</Stack>
-				<Typography
-					variant="body1"
-					fontWeight="bold"
-					lineHeight={1}
-					sx={{
-						opacity: isActive ? 1 : 0.5,
-						fontSize: theme => ({ xs: theme.typography.body1.fontSize, lg: 44 })
-					}}
-				>
-					{subPrayer}
-				</Typography>
 			</Stack>
 		);
 	};

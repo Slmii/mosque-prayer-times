@@ -78,12 +78,7 @@ export default defineConfig({
 		headers: [
 			{
 				source: '/(.*)',
-				headers: [
-					{
-						key: 'Cache-Control',
-						value: 'no-store, max-age=0, must-revalidate'
-					}
-				]
+				headers: [{ key: 'Cache-Control', value: 'no-store, no-cache, must-revalidate' }]
 			}
 		]
 	}
