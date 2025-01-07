@@ -71,7 +71,7 @@ const PrayerTime = ({
 			>
 				<Stack direction="row" alignItems="flex-start" justifyContent="space-between" width="100%">
 					<Stack>
-						<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 24, lg: '4rem' }}>
+						<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 32, lg: '4rem' }}>
 							{prayer}
 						</Typography>
 						<Typography
@@ -80,13 +80,13 @@ const PrayerTime = ({
 							lineHeight={1}
 							sx={{
 								opacity: isActive ? 1 : 0.5,
-								fontSize: theme => ({ xs: theme.typography.body1.fontSize, lg: 44 })
+								fontSize: { xs: 24, lg: 44 }
 							}}
 						>
 							{subPrayer}
 						</Typography>
 					</Stack>
-					<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 24, lg: 100 }} lineHeight={1}>
+					<Typography variant="h3" fontWeight="bold" fontSize={{ xs: 32, lg: 100 }} lineHeight={1}>
 						{time}
 					</Typography>
 				</Stack>

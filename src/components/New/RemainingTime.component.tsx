@@ -74,7 +74,7 @@ export const RemainingTime = () => {
 	}, [remaningTime]);
 
 	return (
-		<Stack direction="column" alignItems="flex-start">
+		<Stack direction="column" alignItems={{ xs: 'center', lg: 'flex-start' }}>
 			<Typography variant="h1" fontSize={{ xs: 24, lg: 50 }} fontWeight="bold" lineHeight={1}>
 				{nextPrayer ? (
 					<>
