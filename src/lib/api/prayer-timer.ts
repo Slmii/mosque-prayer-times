@@ -21,8 +21,8 @@ export interface PrayerTimeResponse {
 }
 
 export const fetchPrayerTimes = async () => {
-	const response = await fetch('https://ezanvakti.emushaf.net/vakitler/13880');
-	const data = (await response.json()) as PrayerTimeResponse[];
+	const response = await fetch(`${import.meta.env.VITE_API_URL}/prayer-times`);
+	const data = (await response.json()) as { data: PrayerTimeResponse[] };
 
-	return data;
+	return data.data;
 };
